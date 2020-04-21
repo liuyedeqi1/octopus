@@ -37,13 +37,13 @@
         </dependency>
 
         <dependency>
-            <artifactId>octopus-core</artifactId>
+            <artifactId>octopus</artifactId>
             <groupId>com.github.liuyedeqi1</groupId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>com.github.liuyedeqi1.octopus</groupId>
+            <groupId>com.github.liuyedeqi1</groupId>
             <artifactId>octopus-server-demo-api</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
