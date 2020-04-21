@@ -18,7 +18,7 @@ maven导入：
 ###  1、首先增加配置参数
 
 服务端的端口<br/>
-octopus.server.config.port=18080<br/><br/>
+octopus.server.config.port=18080<br/>
 
 服务端的核心线程数  缺省 -1表示无限制<br/>
 octopus.server.config.coreThreadCount=100<br/>
@@ -27,7 +27,7 @@ octopus.server.config.coreThreadCount=100<br/>
 octopus.server.config.maxThreadCount=100<br/>
 
 服务端的线程回收时间 缺省 60s<br/>
-octopus.server.config.threadKeepAliveTime=60<br/><br/>
+octopus.server.config.threadKeepAliveTime=60<br/>
 
 ###  2、包路径扫描配置
 在主函数上增加@OctopusScan(basePackage = "your packages")<br/>
@@ -43,7 +43,7 @@ octopus.server.config.threadKeepAliveTime=60<br/><br/>
 octopus.client.config.hosts=127.0.0.1:18080<br/>
 
 客户端扫描地址<br/>
-octopus.client.config.packageScan=com.github.liuyedeqi1.octopus<br/><br/>
+octopus.client.config.packageScan=com.github.liuyedeqi1.octopus<br/>
 
 客户端健康检查间隔 缺省 1s ，如被检查为不健康服务则会从可用的服务集合中暂时移除，直到下次检查为健康状态才能继续回到可用集合<br/>
 octopus.client.config.heartbeatCycleMs=1000<br/>
