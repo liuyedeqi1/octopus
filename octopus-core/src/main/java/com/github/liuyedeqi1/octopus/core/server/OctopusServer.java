@@ -11,9 +11,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
-
 import javax.annotation.PreDestroy;
-import javax.imageio.IIOException;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -26,13 +24,12 @@ import java.util.concurrent.*;
  * @Description: Octopus的RPC服务对象，开启核心线程接收请求连接
  * @date 2020/4/2012:57
  */
-@Component
 public class OctopusServer implements InitializingBean, ApplicationContextAware {
 
     private Log log = LogFactory.getLog(OctopusServer.class);
 
     @Autowired
-    private OctopusServerConfig octopusServerConfig;
+    private OctopusServerProperties octopusServerProperties;
 
     private ExecutorService octopusHandlerService;
 
@@ -45,37 +42,44 @@ public class OctopusServer implements InitializingBean, ApplicationContextAware 
     @Override
     public void afterPropertiesSet() throws Exception {
 
-        if (octopusServerConfig == null && octopusServerConfig.getPort() == null) {
+        if (octopusServerProperties == null && octopusServerProperties.getPort() == null) {
             return;
         }
 
         log.info("OctopusServer is initializing ...");
 
-        if (octopusHandlerService == null && octopusServerConfig != null) {
-            if (octopusServerConfig.getCoreThreadCount() != null && -1 == octopusServerConfig.getCoreThreadCount()) {
+        if (octopusHandlerService == null && octopusServerProperties != null) {
+            if (octopusServerProperties.getCoreThreadCount() != null && -1 == octopusServerProperties.getCoreThreadCount()) {
                 octopusHandlerService = Executors.newCachedThreadPool();
-            } else if (octopusServerConfig.getCoreThreadCount() != null) {
-                octopusHandlerService = new ThreadPoolExecutor(octopusServerConfig.getCoreThreadCount(),
-                        octopusServerConfig.getMaxThreadCount() == null ? octopusServerConfig.getCoreThreadCount() : octopusServerConfig.getMaxThreadCount(),
-                        octopusServerConfig.getThreadKeepAliveTimeout(), TimeUnit.MILLISECONDS,
+            } else if (octopusServerProperties.getCoreThreadCount() != null) {
+                octopusHandlerService = new ThreadPoolExecutor(octopusServerProperties.getCoreThreadCount(),
+                        octopusServerProperties.getMaxThreadCount() == null ? octopusServerProperties.getCoreThreadCount() : octopusServerProperties.getMaxThreadCount(),
+                        octopusServerProperties.getThreadKeepAliveTimeout(), TimeUnit.MILLISECONDS,
                         new LinkedBlockingQueue<Runnable>());
             }
         }
 
-        octopusServerExecutor.submit(() -> {
-            try {
-                ServerSocket serverSocket = new ServerSocket(octopusServerConfig.getPort());
-                log.info("serverSocket is initializing ,accept on: "+octopusServerConfig.getPort());
-                while (!OctopusServer.STOP) {
-                    Socket socket = serverSocket.accept();
-                    octopusHandlerService.submit(new OctopusProcessHandler(socket, handlerMap));
-                }
-            } catch (IOException e) {
-                log.info("serverSocket exception", e);
-            }
-        });
-
+        if(octopusServerProperties.getSycnStart()){
+            start();
+        }else{
+            octopusServerExecutor.submit(() -> {
+                start();
+            });
+        }
         log.info("OctopusServer was initialized!");
+    }
+
+    private void start(){
+        try {
+            ServerSocket serverSocket = new ServerSocket(octopusServerProperties.getPort());
+            log.info("serverSocket is initializing ,accept on: "+ octopusServerProperties.getPort());
+            while (!OctopusServer.STOP) {
+                Socket socket = serverSocket.accept();
+                octopusHandlerService.submit(new OctopusProcessHandler(socket, handlerMap));
+            }
+        } catch (IOException e) {
+            log.info("serverSocket exception", e);
+        }
     }
 
     @Override

@@ -1,20 +1,21 @@
 package com.github.liuyedeqi1.octopus.core.client;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
 
 /**
  * @author 涛声依旧 liuyedeqi@163.com
  * @Description: Octopus的RPC客户端配置
  * @date 2020/4/2013:15
  */
-@Component
-public class OctopusClientConfig {
+@ConfigurationProperties(prefix = "octopus.client" )
+public class OctopusClientProperties {
 
     /**
      * Octopus的RPC服务端hosts,格式：127.0.0.1:8080,127.0.0.1:8081
      */
-    @Value("${octopus.client.config.hosts}")
+    @Value("${octopus.client.config.hosts:}")
     private String hosts;
 
     /**

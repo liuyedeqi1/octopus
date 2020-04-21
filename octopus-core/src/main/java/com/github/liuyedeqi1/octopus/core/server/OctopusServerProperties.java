@@ -1,27 +1,31 @@
 package com.github.liuyedeqi1.octopus.core.server;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * @author 涛声依旧 liuyedeqi@163.com
  * @Description: Octopus的RPC服务配置
  * @date 2020/4/2013:15
  */
-@Component
-public class OctopusServerConfig {
+@ConfigurationProperties(prefix = "octopus.server" )
+public class OctopusServerProperties {
 
-    @Value("${octopus.server.config.port}")
+    @Value("${octopus.server.config.port:}")
     private Integer port;
 
     @Value("${octopus.server.config.coreThreadCount:-1}")
     private Integer coreThreadCount;
 
-    @Value("${octopus.server.config.maxThreadCount}")
+    @Value("${octopus.server.config.maxThreadCount:}")
     private Integer maxThreadCount;
 
     @Value("${octopus.server.config.threadKeepAliveTime:60}")
     private Integer threadKeepAliveTimeout;
+
+    @Value("${octopus.server.config.sync-start:false}")
+    private Boolean sycnStart;
+
 
     public Integer getPort() {
         return port;
@@ -53,5 +57,13 @@ public class OctopusServerConfig {
 
     public void setThreadKeepAliveTimeout(Integer threadKeepAliveTimeout) {
         this.threadKeepAliveTimeout = threadKeepAliveTimeout;
+    }
+
+    public Boolean getSycnStart() {
+        return sycnStart;
+    }
+
+    public void setSycnStart(Boolean sycnStart) {
+        this.sycnStart = sycnStart;
     }
 }

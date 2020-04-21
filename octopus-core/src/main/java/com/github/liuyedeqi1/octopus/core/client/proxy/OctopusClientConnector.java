@@ -1,4 +1,4 @@
-package com.github.liuyedeqi1.octopus.core.client;
+package com.github.liuyedeqi1.octopus.core.client.proxy;
 
 import com.github.liuyedeqi1.octopus.core.OctopusRequest;
 import org.springframework.stereotype.Service;

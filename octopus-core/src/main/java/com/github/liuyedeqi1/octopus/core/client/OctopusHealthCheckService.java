@@ -1,6 +1,7 @@
 package com.github.liuyedeqi1.octopus.core.client;
 
 import com.github.liuyedeqi1.octopus.core.OctopusHeartbeatService;
+import com.github.liuyedeqi1.octopus.core.client.proxy.OctopusProxy;
 import com.github.liuyedeqi1.octopus.core.utils.Weight;
 import com.github.liuyedeqi1.octopus.core.utils.WeightCalculate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class OctopusHealthCheckService {
     private ScheduledExecutorService octopusScheduledThreadPool;
 
     @Autowired
-    private OctopusClientConfig octopusClientConfig;
+    private OctopusClientProperties octopusClientProperties;
 
     private Map<String, AvailableHost> healthClientMap = new java.util.concurrent.ConcurrentHashMap<String, AvailableHost>();
 
@@ -32,7 +33,7 @@ public class OctopusHealthCheckService {
 
     public void initHealthCheck() {
         if (octopusScheduledThreadPool == null) {
-            String hosts[] = octopusClientConfig.getHosts().split(",");
+            String hosts[] = octopusClientProperties.getHosts().split(",");
             octopusScheduledThreadPool = Executors.newScheduledThreadPool(hosts.length);
             for (String host : hosts) {
                 octopusScheduledThreadPool.scheduleWithFixedDelay(() -> {
@@ -50,7 +51,7 @@ public class OctopusHealthCheckService {
                         }
                         badClientMap.put(host, availableHost);
                     }
-                }, 500, octopusClientConfig.getHeartbeatCycle(), TimeUnit.MILLISECONDS);
+                }, 500, octopusClientProperties.getHeartbeatCycle(), TimeUnit.MILLISECONDS);
                 //}, 1000,TimeUnit.MILLISECONDS);
             }
         }

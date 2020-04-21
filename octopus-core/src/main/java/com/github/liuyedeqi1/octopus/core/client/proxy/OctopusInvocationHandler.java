@@ -1,6 +1,8 @@
-package com.github.liuyedeqi1.octopus.core.client;
+package com.github.liuyedeqi1.octopus.core.client.proxy;
 
 import com.github.liuyedeqi1.octopus.core.OctopusRequest;
+import com.github.liuyedeqi1.octopus.core.client.AvailableHost;
+import com.github.liuyedeqi1.octopus.core.client.OctopusHealthCheckService;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;

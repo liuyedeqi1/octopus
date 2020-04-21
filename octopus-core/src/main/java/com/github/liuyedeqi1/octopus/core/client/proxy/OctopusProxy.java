@@ -1,7 +1,7 @@
-package com.github.liuyedeqi1.octopus.core.client;
+package com.github.liuyedeqi1.octopus.core.client.proxy;
 
-import com.github.liuyedeqi1.octopus.core.OctopusHeartbeatService;
-import org.springframework.stereotype.Component;
+import com.github.liuyedeqi1.octopus.core.client.AvailableHost;
+import com.github.liuyedeqi1.octopus.core.client.OctopusHealthCheckService;
 
 import java.lang.reflect.Proxy;
 
