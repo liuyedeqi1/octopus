@@ -5,11 +5,11 @@ import org.springframework.beans.factory.InitializingBean;
 
 /**
  * @author 涛声依旧 liuyedeqi@163.com
- * @Description:
+ * @Description: 给spring容器的代理的类
  * @date 2020/4/2021:37
  */
 public class ProxyFactoryBean implements FactoryBean<Object>, InitializingBean {
-    private Class<?> interfaceClass; // 要生成的代理的类型
+    private Class<?> interfaceClass;
     private Object proxy;
 
     @Override

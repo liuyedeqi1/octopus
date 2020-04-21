@@ -21,7 +21,7 @@ import java.util.Set;
 
 /**
  * @author 涛声依旧 liuyedeqi@163.com
- * @Description:
+ * @Description: Octopus的动态注册类，用于将Octopus的代理对象注册为spring的bean
  * @date 2020/4/2116:48
  */
 public class OctopusImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar {

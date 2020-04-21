@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @author 涛声依旧 liuyedeqi@163.com
- * @Description:
+ * @Description: Octopus的自动配置类，用于注册Octopus的客户端和服务端对象
  * @date 2020/4/2115:56
  */
 @Configuration

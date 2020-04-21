@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 
 /**
  * @author 涛声依旧 liuyedeqi@163.com
- * @Description:
+ * @Description: Octopus主动扫描注解，只有此项配置的包才会被RPC代理
  * @date 2020/4/2116:36
  */
 @Target(value = ElementType.TYPE)

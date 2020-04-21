@@ -2,7 +2,6 @@ package com.github.liuyedeqi1.octopus.demo.client;
 
 import com.github.liuyedeqi1.octopus.core.annotation.ReferenceService;
 import com.github.liuyedeqi1.octopus.demo.server.api.TestRpcService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
